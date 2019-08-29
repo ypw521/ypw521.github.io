@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="ypw521.github.io/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="ypw521.github.io/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="ypw521.github.io/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="ypw521.github.io/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="ypw521.github.io/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="ypw521.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'ypw521.github.io/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="A - Pseudoprime numbersFermat’s theorem states that for any prime number p and for any integer a &amp;gt; 1, ap = a (mod p). That is, if we raise a to the pth power and divide by p, the remainder is a. So">
+<meta name="keywords" content="暑期集训">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCD和快速幂和素筛">
+<meta property="og:url" content="https://ypw521.github.io/2019/08/29/gcde和快速幂/index.html">
+<meta property="og:site_name" content="CJ--F">
+<meta property="og:description" content="A - Pseudoprime numbersFermat’s theorem states that for any prime number p and for any integer a &amp;gt; 1, ap = a (mod p). That is, if we raise a to the pth power and divide by p, the remainder is a. So">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://vj.ti12z.cn/2434fe87fbf9c8e9f8a9463d77505d5d?v=1564859511">
+<meta property="og:updated_time" content="2019-08-06T09:06:46.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GCD和快速幂和素筛">
+<meta name="twitter:description" content="A - Pseudoprime numbersFermat’s theorem states that for any prime number p and for any integer a &amp;gt; 1, ap = a (mod p). That is, if we raise a to the pth power and divide by p, the remainder is a. So">
+<meta name="twitter:image" content="https://vj.ti12z.cn/2434fe87fbf9c8e9f8a9463d77505d5d?v=1564859511">
+  <link rel="canonical" href="https://ypw521.github.io/2019/08/29/gcde和快速幂/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>GCD和快速幂和素筛 | CJ--F</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="ypw521.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CJ--F</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="ypw521.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="ypw521.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ypw521.github.ioypw521.github.io/2019/08/29/gcde和快速幂/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CJ--F">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="ypw521.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CJ--F">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">GCD和快速幂和素筛
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-29 10:06:23" itemprop="dateCreated datePublished" datetime="2019-08-29T10:06:23+08:00">2019-08-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-06 17:06:46" itemprop="dateModified" datetime="2019-08-06T17:06:46+08:00">2019-08-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="ypw521.github.io/categories/GCD和快速幂和素筛/" itemprop="url" rel="index"><span itemprop="name">GCD和快速幂和素筛</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="A-Pseudoprime-numbers"><a href="#A-Pseudoprime-numbers" class="headerlink" title="A - Pseudoprime numbers"></a><a href="https://vjudge.net/problem/POJ-3641" target="_blank" rel="noopener">A - Pseudoprime numbers</a></h2><p>Fermat’s theorem states that for any prime number <em>p</em> and for any integer <em>a</em> &gt; 1, <em>ap</em> = <em>a</em> (mod <em>p</em>). That is, if we raise <em>a</em> to the <em>p</em>th power and divide by <em>p</em>, the remainder is <em>a</em>. Some (but not very many) non-prime values of <em>p</em>, known as base-<em>a</em> pseudoprimes, have this property for some <em>a</em>. (And some, known as Carmichael Numbers, are base-<em>a</em>pseudoprimes for all <em>a</em>.)</p>
+<p>Given 2 &lt; <em>p</em> ≤ 1000000000 and 1 &lt; <em>a</em> &lt; <em>p</em>, determine whether or not <em>p</em> is a base-<em>a</em>pseudoprime.</p>
+<p><strong>Input</strong></p>
+<p>Input contains several test cases followed by a line containing “0 0”. Each test case consists of a line containing <em>p</em> and <em>a</em>.</p>
+<p><strong>Output</strong></p>
+<p>For each test case, output “yes” if p is a base-<em>a</em> pseudoprime; otherwise output “no”.</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">10 3</span><br><span class="line">341 2</span><br><span class="line">341 3</span><br><span class="line">1105 2</span><br><span class="line">1105 3</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">no</span><br><span class="line">no</span><br><span class="line">yes</span><br><span class="line">no</span><br><span class="line">yes</span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 	__int64 a,p,n,i,j;</span><br><span class="line"> 	__<span class="function">int64 <span class="title">exp_mod</span><span class="params">(__int64 a,__int64 b,__int64 n)</span></span>;</span><br><span class="line"> 	<span class="function"><span class="keyword">int</span> <span class="title">isPrime</span><span class="params">(__int64 n)</span></span>;</span><br><span class="line"> 	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%I64d %I64d"</span>,&amp;p,&amp;a)!=EOF&amp;&amp;(a+p)!=<span class="number">0</span>)&#123;</span><br><span class="line"> 		<span class="keyword">if</span>(isPrime(p))</span><br><span class="line"> 			<span class="built_in">printf</span>(<span class="string">"no\n"</span>);</span><br><span class="line"> 		<span class="keyword">else</span>&#123;</span><br><span class="line"> 			<span class="keyword">if</span>(exp_mod(a,p,p)==a)</span><br><span class="line"> 				<span class="built_in">printf</span>(<span class="string">"yes\n"</span>);</span><br><span class="line"> 			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"no\n"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>; 	</span><br><span class="line"> 	</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">isPrime</span><span class="params">(__int64 n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">3</span>;i*i&lt;=n;i=i+<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span>(n%i==<span class="number">0</span>)            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">if</span>(i*i&gt;n)</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> __<span class="function">int64 <span class="title">exp_mod</span><span class="params">(__int64 a,__int64 b,__int64 n)</span></span>&#123;</span><br><span class="line"> 	__int64 r=<span class="number">1</span>;</span><br><span class="line"> 	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>)</span><br><span class="line">			r=(r*a)%n;</span><br><span class="line">		a=(a*a)%n;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="keyword">return</span> r;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="B-Raising-Modulo-Numbers"><a href="#B-Raising-Modulo-Numbers" class="headerlink" title="B - Raising Modulo Numbers"></a><a href="https://vjudge.net/problem/POJ-1995" target="_blank" rel="noopener">B - Raising Modulo Numbers</a></h2><p>   People are different. Some secretly read magazines full of interesting girls’ pictures, others create an A-bomb in their cellar, others like using Windows, and some like difficult mathematical games. Latest marketing research shows, that this market segment was so far underestimated and that there is lack of such games. This kind of game was thus included into the KOKODáKH. The rules follow: </p>
+<p>Each player chooses two numbers Ai and Bi and writes them on a slip of paper. Others cannot see the numbers. In a given moment all players show their numbers to the others. The goal is to determine the sum of all expressions Ai Bi from all players including oneself and determine the remainder after division by a given number M. The winner is the one who first determines the correct result. According to the players’ experience it is possible to increase the difficulty by choosing higher numbers. </p>
+<p>You should write a program that calculates the result and is able to find out who won the game. </p>
+<p><strong>Input</strong></p>
+<p>The input consists of Z assignments. The number of them is given by the single positive integer Z appearing on the first line of input. Then the assignements follow. Each assignement begins with line containing an integer M (1 &lt;= M &lt;= 45000). The sum will be divided by this number. Next line contains number of players H (1 &lt;= H &lt;= 45000). Next exactly H lines follow. On each line, there are exactly two numbers Ai and Bi separated by space. Both numbers cannot be equal zero at the same time.</p>
+<p><strong>Output</strong></p>
+<p>For each assingnement there is the only one line of output. On this line, there is a number, the result of expression<br>$$<br>(A1B1+A2B2+ … +AHBH)mod M.<br>$$<br><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">16</span><br><span class="line">4</span><br><span class="line">2 3</span><br><span class="line">3 4</span><br><span class="line">4 5</span><br><span class="line">5 6</span><br><span class="line">36123</span><br><span class="line">1</span><br><span class="line">2374859 3029382</span><br><span class="line">17</span><br><span class="line">1</span><br><span class="line">3 18132</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">13195</span><br><span class="line">13</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> M;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	a=a%M; </span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">			<span class="keyword">if</span>(b&amp;<span class="number">1</span>)</span><br><span class="line">		ans=(ans*a)%M;</span><br><span class="line">		a=(a*a)%M;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;M,&amp;n);</span><br><span class="line">		<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">			<span class="keyword">int</span> a,b;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">			sum+=fun(a,b); </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,sum%M); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：套用快速幂，超级水的一题。难过(ಥ﹏ಥ)</p>
+<h2 id="C-Wolf-and-Rabbit"><a href="#C-Wolf-and-Rabbit" class="headerlink" title="C - Wolf and Rabbit"></a><a href="https://vjudge.net/problem/HDU-1222" target="_blank" rel="noopener">C - Wolf and Rabbit</a></h2><p>  There is a hill with n holes around. The holes are signed from 0 to n-1. </p>
+<p><img src="https://vj.ti12z.cn/2434fe87fbf9c8e9f8a9463d77505d5d?v=1564859511" alt="img"></p>
+<p>A rabbit must hide in one of the holes. A wolf searches the rabbit in anticlockwise order. The first hole he get into is the one signed with 0. Then he will get into the hole every m holes. For example, m=2 and n=6, the wolf will get into the holes which are signed 0,2,4,0. If the rabbit hides in the hole which signed 1,3 or 5, she will survive. So we call these holes the safe holes.   </p>
+<p><strong>Input</strong></p>
+<p>The input starts with a positive integer P which indicates the number of test cases. Then on the following P lines,each line consists 2 positive integer m and n(0&lt;m,n&lt;2147483648). </p>
+<p><strong>Output</strong></p>
+<p>For each input m n, if safe holes exist, you should output “YES”, else output “NO” in a single line. </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">1 2</span><br><span class="line">2 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NO</span><br><span class="line">YES</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MyGCD</span><span class="params">(<span class="keyword">int</span> num1,<span class="keyword">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(num1%num2!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = num1%num2;</span><br><span class="line">		num1 = num2;</span><br><span class="line">		num2 = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		<span class="keyword">if</span>(MyGCD(a,b)==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"NO"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"YES"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题分析：抽象为一个数学模型，判断m和n的最大公约数是否为1，若GCD(m,n)==1，则代表狼可以搜索所有的洞穴，没有安全洞穴；否则存在安全洞穴。</p>
+<h2 id="D-Cake"><a href="#D-Cake" class="headerlink" title="D - Cake"></a><a href="https://vjudge.net/problem/HDU-1722" target="_blank" rel="noopener">D - Cake</a></h2><p> 一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食. </p>
+<p><strong>Input</strong></p>
+<p>每行有两个数p和q. </p>
+<p><strong>Output</strong></p>
+<p>输出最少要将蛋糕切成多少块. </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b?gcd(b,a%b):a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,c;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;i&gt;&gt;j)</span><br><span class="line">	&#123;</span><br><span class="line">	c = i+j-gcd(i,j);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：可以看成将一个圆切割，第一次要切割成p份，第二次要切割成q份，两者肯定有重合的切割边</p>
+<p>重合的切割边数即为p与q的最小公约数，然后用p与q的和减去最小公约数即可</p>
+<h2 id="E-又见GCD"><a href="#E-又见GCD" class="headerlink" title="E - 又见GCD"></a><a href="https://vjudge.net/problem/HDU-2504" target="_blank" rel="noopener">E - 又见GCD</a></h2><p>有三个正整数a,b,c(0&lt;a,b,c&lt;10^6)，其中c不等于b。若a和c的最大公约数为b，现已知a和b，求满足条件的最小的c。 </p>
+<p><strong>Input</strong></p>
+<p>第一行输入一个n，表示有n组测试数据，接下来的n行，每行输入两个正整数a,b。</p>
+<p><strong>Output</strong></p>
+<p>输出对应的c，每组测试数据占一行。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">6 2</span><br><span class="line">12 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b?gcd(b,a%b):a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,a,c,b;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">	    <span class="keyword">for</span>(c=<span class="number">2</span>*b;;c+=<span class="number">1</span>)</span><br><span class="line">	     &#123;</span><br><span class="line">		 <span class="keyword">if</span>(gcd(a,c)==b)</span><br><span class="line">		 <span class="keyword">break</span>;</span><br><span class="line">		 &#125;</span><br><span class="line">		 </span><br><span class="line">	    <span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：水题。蒙着过。</p>
+<h2 id="F-最小公倍数"><a href="#F-最小公倍数" class="headerlink" title="F - 最小公倍数"></a><a href="https://vjudge.net/problem/HDU-1108" target="_blank" rel="noopener">F - 最小公倍数</a></h2><p>给定两个正整数，计算这两个数的最小公倍数。</p>
+<p><strong>Input</strong></p>
+<p>输入包含多组测试数据，每组只有一行，包括两个不大于1000的正整数.</p>
+<p><strong>Output</strong></p>
+<p>对于每个测试用例，给出这两个数的最小公倍数，每个实例输出一行。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 14</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">70</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b?gcd(b,a%b):a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b)</span><br><span class="line">	   <span class="built_in">cout</span>&lt;&lt;(a*b)/gcd(a,b)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：快速幂模板题目</p>
+<p><a href="https://vjudge.net/problem/HDU-2012" target="_blank" rel="noopener">G - 素数判定</a></p>
+<p>对于表达式n^2+n+41，当n在（x,y）范围内取整数值时（包括x,y）(-39&lt;=x&lt;y&lt;=50)，判定该表达式的值是否都为素数。</p>
+<p><strong>Input</strong></p>
+<p>输入数据有多组，每组占一行，由两个整数x，y组成，当x=0,y=0时，表示输入结束，该行不做处理。</p>
+<p><strong>Output</strong></p>
+<p>对于每个给定范围内的取值，如果表达式的值都为素数，则输出”OK”,否则请输出“Sorry”,每组输出占一行。 </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 1</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">run</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 	<span class="keyword">for</span>(<span class="keyword">double</span> j=x;j&lt;=y;j++)</span><br><span class="line"> 	&#123;</span><br><span class="line">  		<span class="keyword">double</span> m=<span class="built_in">pow</span>(j,<span class="number">2.0</span>)+j+<span class="number">41</span>;</span><br><span class="line">  		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;<span class="built_in">sqrt</span>(m);i++)<span class="comment">//判断是否为素数</span></span><br><span class="line">  		&#123;</span><br><span class="line">   			<span class="keyword">if</span>((<span class="keyword">int</span>)m%i==<span class="number">0</span>)</span><br><span class="line">   			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 	<span class="keyword">int</span> x,y,n;</span><br><span class="line"> 	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;x,&amp;y))</span><br><span class="line"> 	&#123;</span><br><span class="line">  		<span class="keyword">if</span>(x==y&amp;&amp;x==<span class="number">0</span>)</span><br><span class="line">  		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  		n=run(x,y);</span><br><span class="line">  		<span class="keyword">if</span>(n)</span><br><span class="line">  		&#123;</span><br><span class="line">   			<span class="built_in">printf</span>(<span class="string">"OK\n"</span>);</span><br><span class="line">  		&#125;</span><br><span class="line">  		<span class="keyword">else</span></span><br><span class="line">  		&#123;</span><br><span class="line">   			<span class="built_in">printf</span>(<span class="string">"Sorry\n"</span>);</span><br><span class="line">  		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：比较水。按照题意去解题即可。</p>
+<h2 id="H-分拆素数和"><a href="#H-分拆素数和" class="headerlink" title="H - 分拆素数和"></a><a href="https://vjudge.net/problem/HDU-2098" target="_blank" rel="noopener">H - 分拆素数和</a></h2><p>把一个偶数拆成两个不同素数的和，有几种拆法呢？</p>
+<p><strong>Input</strong></p>
+<p>输入包含一些正的偶数，其值不会超过10000，个数不会超过500，若遇0，则结束。</p>
+<p><strong>Output</strong></p>
+<p>对应每个偶数，输出其拆成不同素数的个数，每个结果占一行。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">30</span><br><span class="line">26</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">include&lt;stdlib.h&gt;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Is_Prime</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> r,i;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=<span class="keyword">int</span>(<span class="built_in">sqrt</span>(<span class="keyword">float</span>(n)));i++)</span><br><span class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;<span class="keyword">int</span>(<span class="built_in">sqrt</span>(<span class="keyword">float</span>(n))))</span><br><span class="line">			<span class="keyword">return</span> n;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,num;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&amp;&amp;n)</span><br><span class="line">	&#123;</span><br><span class="line">		num =<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n/<span class="number">2</span>;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(Is_Prime(i)&amp;&amp;Is_Prime(n-i))</span><br><span class="line">		&#123;</span><br><span class="line">			   	   num++;</span><br><span class="line">			<span class="keyword">if</span>(i==n-i)</span><br><span class="line">			   num--;</span><br><span class="line">			   &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	   <span class="built_in">cout</span>&lt;&lt;num&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	    </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路： 先定义一个函数Is_prime( )，用来判断一个数是否为素数，然后只需要判断两个数的和是否为这个偶数，并调用刚刚定义的那个函数判断这两个数是否为素数即可。</p>
+<p><a href="https://vjudge.net/problem/HDU-4548" target="_blank" rel="noopener">I - 美素数</a></p>
+<p>　　小明对数的研究比较热爱，一谈到数，脑子里就涌现出好多数的问题，今天，小明想考考你对素数的认识。<br>　　问题是这样的：一个十进制数，如果是素数，而且它的各位数字和也是素数，则称之为“美素数”，如29，本身是素数，而且2+9 = 11也是素数，所以它是美素数。<br>　　给定一个区间，你能计算出这个区间内有多少个美素数吗？</p>
+<p><strong>Input</strong></p>
+<p>第一行输入一个正整数T，表示总共有T组数据(T &lt;= 10000)。<br>接下来共T行，每行输入两个整数L，R(1&lt;= L &lt;= R &lt;= 1000000)，表示区间的左值和右值。</p>
+<p><strong>Output</strong></p>
+<p>对于每组数据，先输出Case数，然后输出区间内美素数的个数（包括端点值L,R）。<br>每组数据占一行，具体输出格式参见样例。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 100</span><br><span class="line">2 2</span><br><span class="line">3 19</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Case #1: 14</span><br><span class="line">Case #2: 1</span><br><span class="line">Case #3: 4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 1000010  </span></span><br><span class="line"><span class="keyword">int</span> a[max],b[max];  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span>                 <span class="comment">//素数打表，值为1表示素数   </span></span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i,j;  </span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));  <span class="comment">//都记为0； </span></span><br><span class="line">    a[<span class="number">0</span>]=a[<span class="number">1</span>]=<span class="number">1</span>; <span class="comment">//素数计为1； </span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;max;i++)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span>(a[i]==<span class="number">1</span>)  </span><br><span class="line">           <span class="keyword">continue</span>;  </span><br><span class="line">        <span class="keyword">for</span>(j=i*<span class="number">2</span>;j&lt;max;j=j+i)  </span><br><span class="line">           a[j]=<span class="number">1</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span>(n)  </span><br><span class="line">    &#123;  </span><br><span class="line">        sum=sum+n%<span class="number">10</span>;  </span><br><span class="line">        n=n/<span class="number">10</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> sum;  </span><br><span class="line">&#125;                     <span class="comment">//求位数之和   </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i,j=<span class="number">1</span>,t,l,r;  </span><br><span class="line">    init();  </span><br><span class="line">    <span class="built_in">memset</span>(b,<span class="number">0</span>,<span class="keyword">sizeof</span>(b));  </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;max;i++)          <span class="comment">//美素数个数打表   </span></span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span>(a[i]==<span class="number">0</span>&amp;&amp;a[count(i)]==<span class="number">0</span>)  </span><br><span class="line">           b[i]=b[i<span class="number">-1</span>]+<span class="number">1</span>;  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">           b[i]=b[i<span class="number">-1</span>];  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);  </span><br><span class="line">    <span class="keyword">while</span>(t--)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;l,&amp;r);  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>,j++);  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,b[r]-b[l<span class="number">-1</span>]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：美素数定义为一个数是素数并且其各位数字之和也是素数。</p>
+<p>  本题的目的是计算某个区间的美素数的个数。类似这样的问题，不能每次判定，否则计算上必然超时，所以需要打表。</p>
+<p>程序说明：</p>
+<p>  程序中，使用了两个函数来判定一个数是否为美素数。判定一个数是否为素数使用的是试除法，比起筛选法速度相对慢一些。</p>
+<p><a href="https://vjudge.net/problem/HDU-5363" target="_blank" rel="noopener">J - Key Set</a></p>
+<p>soda has a set SS with nn integers {1,2,…,n}{1,2,…,n}. A set is called key set if the sum of integers in the set is an even number. He wants to know how many nonempty subsets of SS are key set.</p>
+<p><strong>Input</strong></p>
+<p>  There are multiple test cases. The first line of input contains an integer TT (1≤T≤105)(1≤T≤105), indicating the number of test cases. For each test case: </p>
+<p>The first line contains an integer nn (1≤n≤109)(1≤n≤109), the number of integers in the set.  </p>
+<p><strong>Output</strong></p>
+<p>For each test case, output the number of key sets modulo 1000000007.</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> MOD=<span class="number">1000000007</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    __int64 r=<span class="number">1</span>,t=a%MOD;</span><br><span class="line">    <span class="keyword">while</span>(b) &#123;</span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)</span><br><span class="line">            r=r*t%MOD;</span><br><span class="line">        t=t*t%MOD;</span><br><span class="line">        b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="built_in">pow</span>(<span class="number">2</span>,n<span class="number">-1</span>)<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：快速幂取余</p>
+<h2 id="K-人见人爱A-B"><a href="#K-人见人爱A-B" class="headerlink" title="K - 人见人爱A^B"></a><a href="https://vjudge.net/problem/HDU-2035" target="_blank" rel="noopener">K - 人见人爱A^B</a></h2><p> 求A^B的最后三位数表示的整数。<br>说明：A^B的含义是“A的B次方” </p>
+<p><strong>Input</strong></p>
+<p>输入数据包含多个测试实例，每个实例占一行，由两个正整数A和B组成（1&lt;=A,B&lt;=10000），如果A=0, B=0，则表示输入数据的结束，不做处理。</p>
+<p><strong>Output</strong></p>
+<p>对于每个测试实例，请输出A^B的最后三位表示的整数，每个输出占一行</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2 3</span><br><span class="line">12 6</span><br><span class="line">6789 10000</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">984</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="number">0</span>&amp;&amp;b==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> s=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=b;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            s=(s*a)%<span class="number">1000</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：水题丫丫丫</p>
+<h2 id="L-Rightmost-Digit"><a href="#L-Rightmost-Digit" class="headerlink" title="L - Rightmost Digit"></a><a href="https://vjudge.net/problem/HDU-1061" target="_blank" rel="noopener">L - Rightmost Digit</a></h2><p>Given a positive integer N, you should output the most right digit of N^N. </p>
+<p><strong>Input</strong></p>
+<p>The input contains several test cases. The first line of the input is a single integer T which is the number of test cases. T test cases follow.<br>Each test case contains a single positive integer N(1&lt;=N&lt;=1,000,000,000).</p>
+<p><strong>Output</strong></p>
+<p>For each test case, you should output the rightmost digit of N^N.</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rightD</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> a=n,b=n;</span><br><span class="line">    a%=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;</span><br><span class="line">      <span class="keyword">if</span>(b&amp;<span class="number">1</span>)&#123;</span><br><span class="line">       ans*=a;</span><br><span class="line">       ans%=<span class="number">10</span>;</span><br><span class="line">     &#125;</span><br><span class="line">        b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        a*=a;</span><br><span class="line">        a%=<span class="number">10</span>;</span><br><span class="line">     &#125;</span><br><span class="line">       <span class="keyword">return</span> ans;</span><br><span class="line">     &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> t,n;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line"><span class="keyword">while</span>(t--)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,rightD(n));</span><br><span class="line">&#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：快速幂模板</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="ypw521.github.io/tags/暑期集训/" rel="tag"># 暑期集训</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="ypw521.github.io/2019/08/29/8.16自学/" rel="next" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Pseudoprime-numbers"><span class="nav-number">1.</span> <span class="nav-text">A - Pseudoprime numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Raising-Modulo-Numbers"><span class="nav-number">2.</span> <span class="nav-text">B - Raising Modulo Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Wolf-and-Rabbit"><span class="nav-number">3.</span> <span class="nav-text">C - Wolf and Rabbit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Cake"><span class="nav-number">4.</span> <span class="nav-text">D - Cake</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-又见GCD"><span class="nav-number">5.</span> <span class="nav-text">E - 又见GCD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-最小公倍数"><span class="nav-number">6.</span> <span class="nav-text">F - 最小公倍数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-分拆素数和"><span class="nav-number">7.</span> <span class="nav-text">H - 分拆素数和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-人见人爱A-B"><span class="nav-number">8.</span> <span class="nav-text">K - 人见人爱A^B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L-Rightmost-Digit"><span class="nav-number">9.</span> <span class="nav-text">L - Rightmost Digit</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CJ--F</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="ypw521.github.io/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CJ--F</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="ypw521.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="ypw521.github.io/js/utils.js?v=7.3.0"></script><script src="ypw521.github.io/js/motion.js?v=7.3.0"></script>
+<script src="ypw521.github.io/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="ypw521.github.io/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="ypw521.github.io/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="ypw521.github.io/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="ypw521.github.io/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="ypw521.github.io/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="ypw521.github.io/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="ypw521.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'ypw521.github.io/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="A - 前m大的数&amp;lt;–!more–&amp;gt; 还记得Gardon给小希布置的那个作业么？（上次比赛的1005）其实小希已经找回了原来的那张数表，现在她想确认一下她的答案是否正确，但是整个的答案是很庞大的表，小希只想让你把答案中最大的M个数告诉她就可以了。给定一个包含N(N&amp;lt;=3000)个正整数的序列，每个数不超过5000，对它们两两相加得到的N*(N-1)/2个和，求出其中前M大的数(M">
+<meta name="keywords" content="暑期集训">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暑期集训第一周sotr+结构体">
+<meta property="og:url" content="https://ypw521.github.io/2019/08/29/sort-结构体/index.html">
+<meta property="og:site_name" content="CJ--F">
+<meta property="og:description" content="A - 前m大的数&amp;lt;–!more–&amp;gt; 还记得Gardon给小希布置的那个作业么？（上次比赛的1005）其实小希已经找回了原来的那张数表，现在她想确认一下她的答案是否正确，但是整个的答案是很庞大的表，小希只想让你把答案中最大的M个数告诉她就可以了。给定一个包含N(N&amp;lt;=3000)个正整数的序列，每个数不超过5000，对它们两两相加得到的N*(N-1)/2个和，求出其中前M大的数(M">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-06T09:06:27.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="暑期集训第一周sotr+结构体">
+<meta name="twitter:description" content="A - 前m大的数&amp;lt;–!more–&amp;gt; 还记得Gardon给小希布置的那个作业么？（上次比赛的1005）其实小希已经找回了原来的那张数表，现在她想确认一下她的答案是否正确，但是整个的答案是很庞大的表，小希只想让你把答案中最大的M个数告诉她就可以了。给定一个包含N(N&amp;lt;=3000)个正整数的序列，每个数不超过5000，对它们两两相加得到的N*(N-1)/2个和，求出其中前M大的数(M">
+  <link rel="canonical" href="https://ypw521.github.io/2019/08/29/sort-结构体/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>暑期集训第一周sotr+结构体 | CJ--F</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="ypw521.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CJ--F</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="ypw521.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="ypw521.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ypw521.github.ioypw521.github.io/2019/08/29/sort-结构体/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CJ--F">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="ypw521.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CJ--F">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">暑期集训第一周sotr+结构体
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-29 10:06:23" itemprop="dateCreated datePublished" datetime="2019-08-29T10:06:23+08:00">2019-08-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-06 17:06:27" itemprop="dateModified" datetime="2019-08-06T17:06:27+08:00">2019-08-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="ypw521.github.io/categories/sotr-结构体/" itemprop="url" rel="index"><span itemprop="name">sotr+结构体</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="A-前m大的数"><a href="#A-前m大的数" class="headerlink" title="A - 前m大的数"></a><a href="https://vjudge.net/problem/HDU-1280" target="_blank" rel="noopener">A - 前m大的数</a></h2><p>&lt;–!more–&gt;<br> 还记得Gardon给小希布置的那个作业么？（上次比赛的1005）其实小希已经找回了原来的那张数表，现在她想确认一下她的答案是否正确，但是整个的答案是很庞大的表，小希只想让你把答案中最大的M个数告诉她就可以了。<br>给定一个包含N(N&lt;=3000)个正整数的序列，每个数不超过5000，对它们两两相加得到的N*(N-1)/2个和，求出其中前M大的数(M&lt;=1000)并按从大到小的顺序排列。</p>
+<p><strong>Input</strong></p>
+<p>输入可能包含多组数据，其中每组数据包括两行：<br>第一行两个数N和M，<br>第二行N个数，表示该序列。 </p>
+<p><strong>Output</strong></p>
+<p>对于输入的每组数据，输出M个数，表示结果。输出应当按照从大到小的顺序排列。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br><span class="line">1 2 3 4</span><br><span class="line">4 5</span><br><span class="line">5 3 6 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7 6 5 5</span><br><span class="line">11 10 9 9 8</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3005</span>],b[<span class="number">5000000</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;<span class="comment">//从大到小进行排序</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,m;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&amp;&amp;n&amp;&amp;m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i,j,k=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="built_in">memset</span>(b,<span class="number">0</span>,<span class="keyword">sizeof</span>(b));<span class="comment">//作用是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法。</span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)<span class="comment">//得到所有的两两相加的数，需要两个循环</span></span><br><span class="line">			<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;n;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				b[k++]=a[i]+a[j];<span class="comment">//存到新数组内，为后续排序做准备</span></span><br><span class="line">			&#125;</span><br><span class="line">			sort(b,b+n*(n<span class="number">-1</span>)/<span class="number">2</span>,cmp);<span class="comment">//排序</span></span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;m<span class="number">-1</span>;i++)<span class="comment">//得到前m项最大的数</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;b[i]&lt;&lt;<span class="string">" "</span>;<span class="comment">//格式控制，有无空格</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;b[m<span class="number">-1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：本题要注意想要得到前m项最大的数，首先要把两两相加后的值以从大到小排列的顺序放到一个新的数组b[]中，具体b数组要开的大小，要靠自己估计。然后输出就行！！！</p>
+<h2 id="B-稳定排序"><a href="#B-稳定排序" class="headerlink" title="B - 稳定排序"></a><a href="https://vjudge.net/problem/HDU-1872" target="_blank" rel="noopener">B - 稳定排序</a></h2><p>   大家都知道，快速排序是不稳定的排序方法。<br>如果对于数组中出现的任意a[i],a<a href="i<j">j</a>,其中a[i]==a[j]，在进行排序以后a[i]一定出现在a[j]之前，则认为该排序是稳定的。 </p>
+<p>某高校招生办得到一份成绩列表，上面记录了考生名字和考生成绩。并且对其使用了某排序算法按成绩进行递减排序。现在请你判断一下该排序算法是否正确，如果正确的话，则判断该排序算法是否为稳定的。   </p>
+<p><strong>Input</strong></p>
+<p>本题目包含多组输入，请处理到文件结束。<br>对于每组数据，第一行有一个正整数N(0&lt;N&lt;300)，代表成绩列表中的考生数目。<br>接下来有N行，每一行有一个字符串代表考生名字(长度不超过50，仅包含’a’~’z’),和一个整数代表考生分数(小于500)。其中名字和成绩用一个空格隔开。<br>再接下来又有N行，是上述列表经过某排序算法以后生成的一个序列。格式同上。</p>
+<p><strong>Output</strong></p>
+<p>对于每组数据，如果算法是正确并且稳定的，就在一行里面输出”Right”。如果算法是正确的但不是稳定的，就在一行里面输出”Not Stable”，并且在下面输出正确稳定排序的列表，格式同输入。如果该算法是错误的，就在一行里面输出”Error”,并且在下面输出正确稳定排序的列表，格式同输入。 </p>
+<p>注意，本题目不考虑该排序算法是错误的，但结果是正确的这样的意外情况。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">cc 20</span><br><span class="line">cc 20</span><br><span class="line">bb 10</span><br><span class="line">aa 10</span><br><span class="line">3</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">cc 20</span><br><span class="line">cc 20</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">3</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">cc 20</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">cc 20</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Not Stable</span><br><span class="line">cc 20</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br><span class="line">Right</span><br><span class="line">Error</span><br><span class="line">cc 20</span><br><span class="line">aa 10</span><br><span class="line">bb 10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;//STL容器</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">List</span>//由于多种不同类型的数组，所以用结构体</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> score;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(List xx, List yy)</span><span class="comment">//bool类型只有两个值，0和1；成绩不相等则按照成绩从高到低排。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (xx.score != yy.score) ? (xx.score &gt; yy.score):(xx.num &lt; yy.num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> notStable, error;</span><br><span class="line">	<span class="built_in">vector</span>&lt;List&gt; a,b;<span class="comment">//建立两个新的不定数列a,b;注意数组的元素时结构体。具体情况具体使用</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n)</span><br><span class="line">	&#123;</span><br><span class="line">		List temp;<span class="comment">//定义了一个结构体变量</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//每次读入把一组数据读入</span></span><br><span class="line">		&#123;</span><br><span class="line">			temp.num = i;<span class="comment">//结构体中此作用是给表上序号，好按照顺序排列。</span></span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; temp.name; <span class="built_in">cin</span> &gt;&gt; temp.score;</span><br><span class="line">			a.push_back(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//存储原来的排列</span></span><br><span class="line">		&#123;</span><br><span class="line">			temp.num = i;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; temp.name; <span class="built_in">cin</span> &gt;&gt; temp.score;</span><br><span class="line">			b.push_back(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(a.begin(), a.end(), comp);<span class="comment">//对a进行排序,成绩从高到低，否则相等则按照顺序</span></span><br><span class="line">		notStable = <span class="number">0</span>, error = <span class="number">0</span>;<span class="comment">//相当于一个flag;</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i].score != b[i].score) error = <span class="number">1</span>;<span class="comment">//成绩不相等</span></span><br><span class="line">			<span class="keyword">if</span> (a[i].name != b[i].name) notStable = <span class="number">1</span>;<span class="comment">//没名字按照顺序输出。</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (error == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//一个for循环，将名字和分数输出。</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; a[i].name &lt;&lt; <span class="string">" "</span> &lt;&lt; a[i].score &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (error == <span class="number">0</span> &amp;&amp; notStable == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Not Stable"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; a[i].name &lt;&lt; <span class="string">" "</span> &lt;&lt; a[i].score &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt;<span class="string">"Right"</span>&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		a.clear(); b.clear();<span class="comment">//要把数据清空，多组数据输入。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：先按照所给样例所给提示即可将问题解析明白，按照分数从高到低排列，分数相同时，按照原来的顺序排序。不按分数从高到低，则Error,不按原来的顺序排列，则Not Stable.此题活用了vector.相关内容我会补充到c++STL。</p>
+<h2 id="C-开门人和关门人"><a href="#C-开门人和关门人" class="headerlink" title="C - 开门人和关门人"></a><a href="https://vjudge.net/problem/HDU-1234" target="_blank" rel="noopener">C - 开门人和关门人</a></h2><p> 每天第一个到机房的人要把门打开，最后一个离开的人要把门关好。现有一堆杂乱的机房签<br>到、签离记录，请根据记录找出当天开门和关门的人。 </p>
+<p><strong>Input</strong></p>
+<p>  测试输入的第一行给出记录的总天数N ( &gt; 0 )。下面列出了N天的记录。<br>每天的记录在第一行给出记录的条目数M ( &gt; 0 )，下面是M行，每行的格式为 </p>
+<p>证件号码 签到时间 签离时间 </p>
+<p>其中时间按“小时:分钟:秒钟”（各占2位）给出，证件号码是长度不超过15的字符串。   </p>
+<p><strong>Output</strong></p>
+<p>对每一天的记录输出1行，即当天开门和关门人的证件号码，中间用1空格分隔。<br>注意：在裁判的标准测试输入中，所有记录保证完整，每个人的签到时间在签离时间之前，<br>且没有多人同时签到或者签离的情况。 </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1</span><br><span class="line">ME3021112225321 00:00:00 23:59:59</span><br><span class="line">2</span><br><span class="line">EE301218 08:05:35 20:56:35</span><br><span class="line">MA301134 12:35:45 21:40:42</span><br><span class="line">3</span><br><span class="line">CS301111 15:30:28 17:00:10</span><br><span class="line">SC3021234 08:00:00 11:25:25</span><br><span class="line">CS301133 21:45:00 21:58:40</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ME3021112225321 ME3021112225321</span><br><span class="line">EE301218 MA301134</span><br><span class="line">SC3021234 CS301133</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;deque&gt;  </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> m,n,i;  </span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="built_in">string</span>&gt; vec;  <span class="comment">//建立两个队列，用来存放时间</span></span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="built_in">string</span>&gt; ve;  </span><br><span class="line">    <span class="built_in">string</span> str,str1,str2;  </span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;  </span><br><span class="line">    <span class="keyword">while</span>(n--)  </span><br><span class="line">    &#123;  </span><br><span class="line">        vec.clear();  <span class="comment">//事先清空数列</span></span><br><span class="line">        ve.clear();  </span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;m;  </span><br><span class="line">        <span class="built_in">string</span> s1=<span class="string">"23:59:59"</span>,s2=<span class="string">"00:00:00"</span>; <span class="comment">//分别代表一天中最早和最晚的时间</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;str&gt;&gt;str1&gt;&gt;str2;  </span><br><span class="line">            <span class="keyword">if</span>(str1&lt;=s1) &#123;s1=str1;vec.push_back(str);&#125;<span class="comment">//代表来的最早的，每次插入队尾，最后一个即为来的最早的.</span></span><br><span class="line">            <span class="keyword">if</span>(str2&gt;=s2) &#123;s2=str2;ve.push_back(str);&#125;<span class="comment">//最晚走的</span></span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;vec[vec.size()<span class="number">-1</span>]&lt;&lt;<span class="string">" "</span>&lt;&lt;ve[ve.size()<span class="number">-1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">          </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：补充知识：（deque容器为一个给定<strong>类型</strong>的元素进行<strong>线性处理</strong>，像向量一样，它<strong>能够快速地随机访问任一个元素</strong>，并且能够高效地<strong>插入和删除</strong>容器的尾部元素。但它又与vector不同，<strong>deque支持高效插入和删除容器的头部元素</strong>，因此也叫做<strong>双端队列</strong>）。方法比较巧妙，理解应该很容易。</p>
+<p><a href="https://vjudge.net/problem/HDU-1862" target="_blank" rel="noopener">D - EXCEL排序</a></p>
+<p>Excel可以对一组纪录按任意指定列排序。现请你编写程序实现类似功能。</p>
+<p><strong>Input</strong></p>
+<p>测试输入包含若干测试用例。每个测试用例的第1行包含两个整数 N (&lt;=100000) 和 C，其中 N 是纪录的条数，C 是指定排序的列号。以下有 N<br>行，每行包含一条学生纪录。每条学生纪录由学号（6位数字，同组测试中没有重复的学号）、姓名（不超过8位且不包含空格的字符串）、成绩（闭区间[0, 100]内的整数）组成，每个项目间用1个空格隔开。当读到 N=0 时，全部输入结束，相应的结果不要输出。</p>
+<p><strong>Output</strong></p>
+<p>对每个测试用例，首先输出1行“Case i:”，其中 i 是测试用例的编号（从1开始）。随后在 N 行中输出按要求排序后的结果，即：当 C=1 时，按学号递增排序；当 C=2时，按姓名的非递减字典序排序；当 C=3<br>时，按成绩的非递减排序。当若干学生具有相同姓名或者相同成绩时，则按他们的学号递增排序。 </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">000007 James 85</span><br><span class="line">000010 Amy 90</span><br><span class="line">000001 Zoe 60</span><br><span class="line">4 2</span><br><span class="line">000007 James 85</span><br><span class="line">000010 Amy 90</span><br><span class="line">000001 Zoe 60</span><br><span class="line">000002 James 98</span><br><span class="line">4 3</span><br><span class="line">000007 James 85</span><br><span class="line">000010 Amy 90</span><br><span class="line">000001 Zoe 60</span><br><span class="line">000002 James 90</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Case 1:</span><br><span class="line">000001 Zoe 60</span><br><span class="line">000007 James 85</span><br><span class="line">000010 Amy 90</span><br><span class="line">Case 2:</span><br><span class="line">000010 Amy 90</span><br><span class="line">000002 James 98</span><br><span class="line">000007 James 85</span><br><span class="line">000001 Zoe 60</span><br><span class="line">Case 3:</span><br><span class="line">000001 Zoe 60</span><br><span class="line">000007 James 85</span><br><span class="line">000002 James 90</span><br><span class="line">000010 Amy 90</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> <span class="keyword">int</span> C;</span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">ssss</span></span></span><br><span class="line"><span class="class"> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> a[<span class="number">10</span>],b[<span class="number">10</span>];</span><br><span class="line">  <span class="keyword">int</span> c;</span><br><span class="line"> &#125;ss[<span class="number">111111</span>];</span><br><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> ssss &amp;a,<span class="keyword">const</span> ssss &amp;b)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(C==<span class="number">1</span>)</span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">strcmp</span>(a.a,b.a)&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(C==<span class="number">2</span>)</span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">strcmp</span>(a.b,b.b)&lt;<span class="number">0</span>||<span class="built_in">strcmp</span>(a.b,b.b)==<span class="number">0</span>&amp;&amp;<span class="built_in">strcmp</span>(a.a,b.a)&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(C==<span class="number">3</span>)</span><br><span class="line">   <span class="keyword">if</span>(a.c&lt;b.c||a.c==b.c&amp;&amp;<span class="built_in">strcmp</span>(a.a,b.a)&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n,i,j,k=<span class="number">1</span>,l;</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;C)!=EOF&amp;&amp;n)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%*c%s%s%d"</span>,ss[i].a,ss[i].b,&amp;ss[i].c);</span><br><span class="line">   sort(ss,ss+n,cmp);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"Case %d:\n"</span>,k++);</span><br><span class="line">   <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s %s %d\n"</span>,ss[i].a,ss[i].b,ss[i].c);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：此题easy! 按照题目要求来就行了。<del>(<em>^▽^</em>)</del></p>
+<h2 id="E-统计同成绩学生人数"><a href="#E-统计同成绩学生人数" class="headerlink" title="E - 统计同成绩学生人数"></a><a href="https://vjudge.net/problem/HDU-1235" target="_blank" rel="noopener">E - 统计同成绩学生人数</a></h2><p> 读入N名学生的成绩，将获得某一给定分数的学生人数输出</p>
+<p><strong>Input</strong></p>
+<p>  测试输入包含若干测试用例，每个测试用例的格式为 </p>
+<p>第1行：N<br>第2行：N名学生的成绩，相邻两数字用一个空格间隔。<br>第3行：给定分数 </p>
+<p>当读到N=0时输入结束。其中N不超过1000，成绩分数为（包含）0到100之间的一个整数。   </p>
+<p><strong>Output</strong></p>
+<p>对每个测试用例，将获得给定分数的学生人数输出。 </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">80 60 90</span><br><span class="line">60</span><br><span class="line">2</span><br><span class="line">85 66</span><br><span class="line">0</span><br><span class="line">5</span><br><span class="line">60 75 90 55 75</span><br><span class="line">75</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">0</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">  </span><br><span class="line">Huge input, scanf is recommended.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">int</span> p[<span class="number">10000</span>];</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n,n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> m;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;p[i];</span><br><span class="line">		&#125;</span><br><span class="line">          <span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">		  <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">		  <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">			  <span class="keyword">if</span>(p[j]==m)</span><br><span class="line">				  count++;</span><br><span class="line">				  <span class="built_in">cout</span>&lt;&lt;count&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：水题！！！怎么能这么水<del>~</del></p>
+<h2 id="F-What-Is-Your-Grade"><a href="#F-What-Is-Your-Grade" class="headerlink" title="F - What Is Your Grade?"></a><a href="https://vjudge.net/problem/HDU-1084" target="_blank" rel="noopener">F - What Is Your Grade?</a></h2><p>“Point, point, life of student!”<br>This is a ballad（歌谣）well known in colleges, and you must care about your score in this exam too. How many points can you get? Now, I told you the rules which are used in this course.<br>There are 5 problems in this final exam. And I will give you 100 points if you can solve all 5 problems; of course, it is fairly difficulty for many of you. If you can solve 4 problems, you can also get a high score 95 or 90 (you can get the former(前者) only when your rank is in the first half of all students who solve 4 problems). Analogically（以此类推）, you can get 85、80、75、70、65、60. But you will not pass this exam if you solve nothing problem, and I will mark your score with 50.<br>Note, only 1 student will get the score 95 when 3 students have solved 4 problems.<br>I wish you all can pass the exam!<br>Come on! </p>
+<p><strong>Input</strong></p>
+<p>Input contains multiple test cases. Each test case contains an integer N (1&lt;=N&lt;=100, the number of students) in a line first, and then N lines follow. Each line contains P (0&lt;=P&lt;=5 number of problems that have been solved) and T（consumed time）. You can assume that all data are different when 0&lt;p.<br>A test case starting with a negative integer terminates the input and this test case should not to be processed. </p>
+<p><strong>Output</strong></p>
+<p>Output the scores of N students in N lines for each case, and there is a blank line after each case. </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">5 06:30:17</span><br><span class="line">4 07:31:27</span><br><span class="line">4 08:12:12</span><br><span class="line">4 05:23:13</span><br><span class="line">1</span><br><span class="line">5 06:30:17</span><br><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">100</span><br><span class="line">90</span><br><span class="line">90</span><br><span class="line">95</span><br><span class="line"></span><br><span class="line">100</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">list</span>;		<span class="comment">//原来的排序 </span></span><br><span class="line">	<span class="keyword">int</span> n;		<span class="comment">//解决的题数 </span></span><br><span class="line">	<span class="keyword">int</span> time;		<span class="comment">//花的时间（转化为秒） </span></span><br><span class="line">	<span class="keyword">int</span> grade;		<span class="comment">//最终成绩</span></span><br><span class="line">&#125;pre[<span class="number">111</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp1</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a.n==b.n)</span><br><span class="line">		<span class="keyword">return</span> a.time&lt;b.time;</span><br><span class="line">	<span class="keyword">return</span> a.n&gt;b.n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.<span class="built_in">list</span>&lt;b.<span class="built_in">list</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> u;</span><br><span class="line">	<span class="keyword">int</span> num[<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">int</span> th,tm,ts;		<span class="comment">//时间 </span></span><br><span class="line">	<span class="keyword">while</span> (~<span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;u) &amp;&amp; (u&gt;<span class="number">0</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span> (num,<span class="number">0</span>,<span class="keyword">sizeof</span> (num));</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;u;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span> (<span class="string">"%d %d:%d:%d"</span>,&amp;pre[i].n,&amp;th,&amp;tm,&amp;ts);</span><br><span class="line">			pre[i].grade=<span class="number">50</span>+pre[i].n*<span class="number">10</span>;</span><br><span class="line">			pre[i].<span class="built_in">list</span>=i;</span><br><span class="line">			pre[i].time=<span class="number">3600</span>*th+<span class="number">60</span>*tm+ts;</span><br><span class="line">			num[pre[i].n]++;</span><br><span class="line">		&#125;</span><br><span class="line">		sort (pre,pre+u,cmp1);</span><br><span class="line">		</span><br><span class="line">		num[<span class="number">1</span>]/=<span class="number">2</span>;</span><br><span class="line">		num[<span class="number">2</span>]/=<span class="number">2</span>;</span><br><span class="line">		num[<span class="number">3</span>]/=<span class="number">2</span>;</span><br><span class="line">		num[<span class="number">4</span>]/=<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">4</span>;i&lt;u;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (pre[i].n==<span class="number">0</span> || pre[i].n==<span class="number">5</span>)</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			j=pre[i].n;</span><br><span class="line">			<span class="keyword">if</span> (num[j]==<span class="number">0</span>)</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				pre[i].grade+=<span class="number">5</span>;</span><br><span class="line">				num[j]--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		sort (pre,pre+u,cmp2);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;u;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span> (<span class="string">"%d\n"</span>,pre[i].grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：此题不做过多的讲解，主要的是95分数段那一块。仔细看应该不难理解。ヾ(◍°∇°◍)ﾉﾞ</p>
+<h2 id="G-Magical-Bamboos"><a href="#G-Magical-Bamboos" class="headerlink" title="G - Magical Bamboos"></a><a href="https://vjudge.net/problem/Gym-101350D" target="_blank" rel="noopener">G - Magical Bamboos</a></h2><p>In a magical forest, there exists <em>N</em> bamboos that don’t quite get cut down the way you would expect.</p>
+<p>Originally, the height of the <em>i**th</em> bamboo is equal to <em>h**i</em>. In one move, you can push down a bamboo and decrease its height by one, but this move magically causes all the other bamboos to increase in height by one.</p>
+<p>If you can do as many moves as you like, is it possible to make all the bamboos have the same height?</p>
+<p><strong>Input</strong></p>
+<p>The first line of input is <em>T</em> – the number of test cases.</p>
+<p>The first line of each test case contains an integer <em>N</em> (1 ≤ <em>N</em> ≤ 105) - the number of bamboos.</p>
+<p>The second line contains <em>N</em> space-separated integers <em>h**i</em> (1 ≤ <em>h**i</em> ≤ 105) - the original heights of the bamboos.</p>
+<p><strong>Output</strong></p>
+<p>For each test case, output on a single line “yes” (without quotes), if you can make all the bamboos have the same height, and “no” otherwise.</p>
+<p><strong>Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br><span class="line">2 4 2</span><br><span class="line">2</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yes</span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN =<span class="number">1e5</span>+<span class="number">10</span>;<span class="comment">//以后请这样定义数组。不要问为什么。b格高吧应该</span></span><br><span class="line"><span class="keyword">int</span> arr[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		 <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;arr[i]);</span><br><span class="line">        sort(arr,arr+n,cmp);</span><br><span class="line">        <span class="keyword">int</span> flag=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">            <span class="keyword">if</span>((arr[i]-arr[i<span class="number">-1</span>])&amp;<span class="number">1</span>)<span class="comment">//这里是有规律的，如何任意两数之差为奇数，则不可能。</span></span><br><span class="line">			 &#123;</span><br><span class="line">                flag=<span class="number">0</span>;</span><br><span class="line">			    <span class="keyword">break</span>;</span><br><span class="line">             &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">		  <span class="built_in">puts</span>(<span class="string">"yes"</span>);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">		  <span class="built_in">puts</span>(<span class="string">"no"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：一般这种题都有明确的规律，多列几组找找规律即可。</p>
+<p><a href="https://vjudge.net/problem/CodeForces-653A" target="_blank" rel="noopener">H - Bear and Three Balls</a></p>
+<p>Limak is a little polar bear. He has <em>n</em> balls, the <em>i</em>-th ball has size <em>t**i</em>.</p>
+<p>Limak wants to give one ball to each of his three friends. Giving gifts isn’t easy — there are two rules Limak must obey to make friends happy:</p>
+<ul>
+<li>No two friends can get balls of the same size.</li>
+<li>No two friends can get balls of sizes that differ by more than 2.</li>
+</ul>
+<p>For example, Limak can choose balls with sizes 4, 5 and 3, or balls with sizes 90, 91 and 92. But he can’t choose balls with sizes 5, 5 and 6 (two friends would get balls of the same size), and he can’t choose balls with sizes 30, 31 and 33 (because sizes 30 and 33 differ by more than 2).</p>
+<p>Your task is to check whether Limak can choose three balls that satisfy conditions above.</p>
+<p><strong>Input</strong></p>
+<p>The first line of the input contains one integer <em>n</em> (3 ≤ <em>n</em> ≤ 50) — the number of balls Limak has.</p>
+<p>The second line contains <em>n</em> integers <em>t</em>1, <em>t</em>2, …, <em>t**n</em> (1 ≤ <em>t**i</em> ≤ 1000) where <em>t**i</em> denotes the size of the <em>i</em>-th ball.</p>
+<p><strong>Output</strong></p>
+<p>Print “YES” (without quotes) if Limak can choose three balls of distinct sizes, such that any two of them differ by no more than 2. Otherwise, print “NO” (without quotes).</p>
+<p><strong>Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">18 55 16 17</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">60</span>],a[<span class="number">60</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="keyword">int</span> n,i;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;b[i]);	</span><br><span class="line">	&#125;</span><br><span class="line">	sort(b,b+n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)<span class="comment">//去重 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(b[i]!=b[i<span class="number">-1</span>])</span><br><span class="line">	    num++;</span><br><span class="line">		a[num]=b[i];</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">3</span>;i&lt;=num;i++)</span><br><span class="line">	<span class="keyword">if</span>(a[i]-a[i<span class="number">-1</span>]==<span class="number">1</span>&amp;&amp;a[i]-a[i<span class="number">-2</span>]==<span class="number">2</span>)</span><br><span class="line">    &#123;	</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">"YES"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;	 </span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"NO"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：读懂题意后发现此题的目的只是为了找到三个连续的数罢了。o(╥﹏╥)o</p>
+<h2 id="I-今年暑假不AC"><a href="#I-今年暑假不AC" class="headerlink" title="I - 今年暑假不AC"></a><a href="https://vjudge.net/problem/HDU-2037" target="_blank" rel="noopener">I - 今年暑假不AC</a></h2><p>  “今年暑假不AC？”<br>“是的。”<br>“那你干什么呢？”<br>“看世界杯呀，笨蛋！”<br>“@#$%^&amp;*%…” </p>
+<p>确实如此，世界杯来了，球迷的节日也来了，估计很多ACMer也会抛开电脑，奔向电视了。<br>作为球迷，一定想看尽量多的完整的比赛，当然，作为新时代的好青年，你一定还会看一些其它的节目，比如新闻联播（永远不要忘记关心国家大事）、非常6+7、超级女生，以及王小丫的《开心辞典》等等，假设你已经知道了所有你喜欢看的电视节目的转播时间表，你会合理安排吗？（目标是能看尽量多的完整节目）   </p>
+<p><strong>Input</strong></p>
+<p>输入数据包含多个测试实例，每个测试实例的第一行只有一个整数n(n&lt;=100)，表示你喜欢看的节目的总数，然后是n行数据，每行包括两个数据Ti_s,Ti_e (1&lt;=i&lt;=n)，分别表示第i个节目的开始和结束时间，为了简化问题，每个时间都用一个正整数表示。n=0表示输入结束，不做处理。 </p>
+<p><strong>Output</strong></p>
+<p>对于每个测试实例，输出能完整看到的电视节目的个数，每个测试实例的输出占一行。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">12</span><br><span class="line">1 3</span><br><span class="line">3 4</span><br><span class="line">0 7</span><br><span class="line">3 8</span><br><span class="line">15 19</span><br><span class="line">15 20</span><br><span class="line">10 15</span><br><span class="line">8 18</span><br><span class="line">6 12</span><br><span class="line">5 10</span><br><span class="line">4 14</span><br><span class="line">2 9</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> namespace std;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> start;</span><br><span class="line">	<span class="keyword">int</span> end;</span><br><span class="line">&#125;a[<span class="number">100</span>],b,c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(struct date b,struct date c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.end &lt; c.end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,n,ans;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n),n!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a[i].start,&amp;a[i].end);</span><br><span class="line">		sort(a,a+n,cmp);</span><br><span class="line">		ans = <span class="number">1</span>;</span><br><span class="line">		b = a[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i].start&gt;=b.end)</span><br><span class="line">			&#123;</span><br><span class="line">				ans++;</span><br><span class="line">				b = a[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：贪心问题，当开始时间大于等于结束时间时，及可认为可以。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="ypw521.github.io/tags/暑期集训/" rel="tag"># 暑期集训</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="ypw521.github.io/2019/08/29/并查集讲解/" rel="prev" title="并查集">
+                  并查集 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-前m大的数"><span class="nav-number">1.</span> <span class="nav-text">A - 前m大的数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-稳定排序"><span class="nav-number">2.</span> <span class="nav-text">B - 稳定排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-开门人和关门人"><span class="nav-number">3.</span> <span class="nav-text">C - 开门人和关门人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-统计同成绩学生人数"><span class="nav-number">4.</span> <span class="nav-text">E - 统计同成绩学生人数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-What-Is-Your-Grade"><span class="nav-number">5.</span> <span class="nav-text">F - What Is Your Grade?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Magical-Bamboos"><span class="nav-number">6.</span> <span class="nav-text">G - Magical Bamboos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-今年暑假不AC"><span class="nav-number">7.</span> <span class="nav-text">I - 今年暑假不AC</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CJ--F</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="ypw521.github.io/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CJ--F</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="ypw521.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="ypw521.github.io/js/utils.js?v=7.3.0"></script><script src="ypw521.github.io/js/motion.js?v=7.3.0"></script>
+<script src="ypw521.github.io/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="ypw521.github.io/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="ypw521.github.io/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="ypw521.github.io/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="ypw521.github.io/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="ypw521.github.io/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="ypw521.github.io/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="ypw521.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'ypw521.github.io/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="B - Train Problem IAs the new term comes, the Ignatius Train Station is very busy nowadays. A lot of student want to get back to school by train(because the trains in the Ignatius Train Station is the">
+<meta name="keywords" content="暑期集训">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL栈，队列，不定数组。">
+<meta property="og:url" content="https://ypw521.github.io/2019/08/29/暑期培训第三周/index.html">
+<meta property="og:site_name" content="CJ--F">
+<meta property="og:description" content="B - Train Problem IAs the new term comes, the Ignatius Train Station is very busy nowadays. A lot of student want to get back to school by train(because the trains in the Ignatius Train Station is the">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://vj.ti12z.cn/e07a7819adc3fce5ee075d011a0a1d3a?v=1564926901">
+<meta property="og:image" content="https://vj.ti12z.cn/3ed5e24625225c0a75f84ac6dbeceabe?v=1564926901">
+<meta property="og:image" content="https://vj.ti12z.cn/b72889e34d63c9ba1c9624e8d50888c9?v=1564926901">
+<meta property="og:image" content="https://vj.ti12z.cn/cd97ac1d55abb22648bea1fa76d46d45?v=1564849716">
+<meta property="og:updated_time" content="2019-08-06T09:06:05.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL栈，队列，不定数组。">
+<meta name="twitter:description" content="B - Train Problem IAs the new term comes, the Ignatius Train Station is very busy nowadays. A lot of student want to get back to school by train(because the trains in the Ignatius Train Station is the">
+<meta name="twitter:image" content="https://vj.ti12z.cn/e07a7819adc3fce5ee075d011a0a1d3a?v=1564926901">
+  <link rel="canonical" href="https://ypw521.github.io/2019/08/29/暑期培训第三周/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>STL栈，队列，不定数组。 | CJ--F</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="ypw521.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CJ--F</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="ypw521.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="ypw521.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ypw521.github.ioypw521.github.io/2019/08/29/暑期培训第三周/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CJ--F">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="ypw521.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CJ--F">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">STL栈，队列，不定数组。
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-29 10:06:23" itemprop="dateCreated datePublished" datetime="2019-08-29T10:06:23+08:00">2019-08-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-06 17:06:05" itemprop="dateModified" datetime="2019-08-06T17:06:05+08:00">2019-08-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="ypw521.github.io/categories/STL栈，队列，不定数组/" itemprop="url" rel="index"><span itemprop="name">STL栈，队列，不定数组</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="B-Train-Problem-I"><a href="#B-Train-Problem-I" class="headerlink" title="B - Train Problem I"></a><a href="https://vjudge.net/problem/HDU-1022" target="_blank" rel="noopener">B - Train Problem I</a></h2><p>As the new term comes, the Ignatius Train Station is very busy nowadays. A lot of student want to get back to school by train(because the trains in the Ignatius Train Station is the fastest all over the world ^v^). But here comes a problem, there is only one railway where all the trains stop. So all the trains come in from one side and get out from the other side. For this problem, if train A gets into the railway first, and then train B gets into the railway before train A leaves, train A can’t leave until train B leaves. The pictures below figure out the problem. Now the problem for you is, there are at most 9 trains in the station, all the trains has an ID(numbered from 1 to n), the trains get into the railway in an order O1, your task is to determine whether the trains can get out in an order O2.<br><img src="https://vj.ti12z.cn/e07a7819adc3fce5ee075d011a0a1d3a?v=1564926901" alt="img"> <img src="https://vj.ti12z.cn/3ed5e24625225c0a75f84ac6dbeceabe?v=1564926901" alt="img"> <img src="https://vj.ti12z.cn/b72889e34d63c9ba1c9624e8d50888c9?v=1564926901" alt="img"></p>
+<p><strong>Input</strong></p>
+<p>The input contains several test cases. Each test case consists of an integer, the number of trains, and two strings, the order of the trains come in:O1, and the order of the trains leave:O2. The input is terminated by the end of file. More details in the Sample Input. </p>
+<p><strong>Output</strong></p>
+<p>The output contains a string “No.” if you can’t exchange O2 to O1, or you should output a line contains “Yes.”, and then output your way in exchanging the order(you should output “in” for a train getting into the railway, and “out” for a train getting out of the railway). Print a line contains “FINISH” after each test case. More details in the Sample Output. </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 123 321</span><br><span class="line">3 123 312</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Yes.</span><br><span class="line">in</span><br><span class="line">in</span><br><span class="line">in</span><br><span class="line">out</span><br><span class="line">out</span><br><span class="line">out</span><br><span class="line">FINISH</span><br><span class="line">No.</span><br><span class="line">FINISH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">  </span><br><span class="line">For the first Sample Input, we let train 1 get in, then train 2 and train 3.</span><br><span class="line">So now train 3 is at the top of the railway, so train 3 can leave first, then train 2 and train 1.</span><br><span class="line">In the second Sample input, we should let train 3 leave first, so we have to let train 1 get in, then train 2 and train 3.</span><br><span class="line">Now we can let train 3 leave.</span><br><span class="line">But after that we can&apos;t let train 1 leave before train 2, because train 2 is at the top of the railway at the moment.</span><br><span class="line">So we output &quot;No.&quot;.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">char</span> str1[<span class="number">10005</span>]=&#123;<span class="string">'\0'</span>&#125;,str2[<span class="number">10005</span>]=&#123;<span class="string">'\0'</span>&#125;; </span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>,str1,str2);</span><br><span class="line">		<span class="keyword">char</span> ans[<span class="number">20005</span>][<span class="number">5</span>]=&#123;<span class="string">'\0'</span>&#125;;</span><br><span class="line">		<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt;s;</span><br><span class="line">		s.push(<span class="string">'#'</span>);</span><br><span class="line">		<span class="keyword">bool</span> check=<span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==n||(i==n&amp;&amp;s.top()==<span class="string">'#'</span>))&#123;</span><br><span class="line">				check=<span class="literal">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(i==n&amp;&amp;s.top()!=str2[j])</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">if</span>(str1[i]!=str2[j]&amp;&amp;s.top()!=str2[j])&#123;</span><br><span class="line">				s.push(str1[i]);</span><br><span class="line">				i++;</span><br><span class="line">				<span class="built_in">strcpy</span>(ans[k++],<span class="string">"in"</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(str1[i]==str2[j])&#123;</span><br><span class="line">				<span class="built_in">strcpy</span>(ans[k++],<span class="string">"in"</span>);</span><br><span class="line">				<span class="built_in">strcpy</span>(ans[k++],<span class="string">"out"</span>);</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(s.top()==str2[j])&#123;</span><br><span class="line">				<span class="built_in">strcpy</span>(ans[k++],<span class="string">"out"</span>);</span><br><span class="line">				j++;</span><br><span class="line">				s.pop();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(check)&#123;</span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"Yes."</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">				<span class="built_in">puts</span>(ans[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"No."</span>);</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"FINISH"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：和C题相似。</p>
+<h2 id="C-Rails"><a href="#C-Rails" class="headerlink" title="C - Rails"></a><a href="https://vjudge.net/problem/POJ-1363" target="_blank" rel="noopener">C - Rails</a></h2><p> There is a famous railway station in PopPush City. Country there is incredibly hilly. The station was built in last century. Unfortunately, funds were extremely limited that time. It was possible to establish only a surface track. Moreover, it turned out that the station could be only a dead-end one (see picture) and due to lack of available space it could have only one track.<br><img src="https://vj.ti12z.cn/cd97ac1d55abb22648bea1fa76d46d45?v=1564849716" alt="img"><br>The local tradition is that every train arriving from the direction A continues in the direction B with coaches reorganized in some way. Assume that the train arriving from the direction A has N &lt;= 1000 coaches numbered in increasing order 1, 2, …, N. The chief for train reorganizations must know whether it is possible to marshal coaches continuing in the direction B so that their order will be a1, a2, …, aN. Help him and write a program that decides whether it is possible to get the required order of coaches. You can assume that single coaches can be disconnected from the train before they enter the station and that they can move themselves until they are on the track in the direction B. You can also suppose that at any time there can be located as many coaches as necessary in the station. But once a coach has entered the station it cannot return to the track in the direction A and also once it has left the station in the direction B it cannot return back to the station. </p>
+<p><strong>Input</strong></p>
+<p>  The input consists of blocks of lines. Each block except the last describes one train and possibly more requirements for its reorganization. In the first line of the block there is the integer N described above. In each of the next lines of the block there is a permutation of 1, 2, …, N. The last line of the block contains just 0. </p>
+<p>The last block consists of just one line containing 0.  </p>
+<p><strong>Output</strong></p>
+<p>The output contains the lines corresponding to the lines with permutations in the input. A line of the output contains Yes if it is possible to marshal the coaches in the order required on the corresponding line of the input. Otherwise it contains No. In addition, there is one empty line after the lines corresponding to one block of the input. There is no line in the output corresponding to the last ``null’’ block of the input.</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 3 4 5</span><br><span class="line">5 4 1 2 3</span><br><span class="line">0</span><br><span class="line">6</span><br><span class="line">6 5 4 3 2 1</span><br><span class="line">0</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">No</span><br><span class="line"></span><br><span class="line">Yes</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[<span class="number">0</span>]);</span><br><span class="line">			<span class="keyword">if</span> (!a[<span class="number">0</span>]) </span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; n;i ++)</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">			<span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i ++)</span><br><span class="line">			&#123;</span><br><span class="line">				s.push(i);</span><br><span class="line">				<span class="keyword">while</span> (!s.empty() &amp;&amp; s.top() == a[pos])</span><br><span class="line">				&#123;</span><br><span class="line">					s.pop();</span><br><span class="line">					pos ++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (s.empty()) <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：具体看代码，还是比较好理解的。</p>
+<h2 id="D-A-B"><a href="#D-A-B" class="headerlink" title="D - {A} + {B}"></a><a href="https://vjudge.net/problem/HDU-1412" target="_blank" rel="noopener">D - {A} + {B}</a></h2><p> 给你两个集合，要求{A} + {B}.<br>注:同一个集合中不会有两个相同的元素.</p>
+<p><strong>Input</strong></p>
+<p>每组输入数据分为三行,第一行有两个数字n,m(0&lt;n,m&lt;=10000),分别表示集合A和集合B的元素个数.后两行分别表示集合A和集合B.每个元素为不超出int范围的整数,每个元素之间有一个空格隔开.</p>
+<p><strong>Output</strong></p>
+<p>针对每组数据输出一行数据,表示合并后的集合,要求从小到大输出,每个元素之间有一个空格隔开.</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 2</span><br><span class="line">1</span><br><span class="line">2 3</span><br><span class="line">1 2</span><br><span class="line">1</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 2 3</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> C[<span class="number">20000</span>];</span><br><span class="line">    <span class="keyword">int</span> n,m,a;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&amp;&amp;n&gt;<span class="number">0</span>&amp;&amp;m&gt;<span class="number">0</span>&amp;&amp;n&lt;=<span class="number">10000</span>&amp;&amp;m&lt;=<span class="number">10000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n+m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;C[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n+m; ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n+m<span class="number">-1</span>; ++j)</span><br><span class="line">                <span class="keyword">if</span>(C[j]&gt;C[j+<span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                    a=C[j];</span><br><span class="line">                    C[j]=C[j+<span class="number">1</span>];</span><br><span class="line">                    C[j+<span class="number">1</span>]=a;</span><br><span class="line">                &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;C[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n+m; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(C[i]==C[i<span class="number">-1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>&lt;&lt;C[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://vjudge.net/problem/HDU-1004" target="_blank" rel="noopener">F - Let the Balloon Rise</a></p>
+<p>Contest time again! How excited it is to see balloons floating around. But to tell you a secret, the judges’ favorite time is guessing the most popular problem. When the contest is over, they will count the balloons of each color and find the result.</p>
+<p>This year, they decide to leave this lovely job to you.   </p>
+<p><strong>Input</strong></p>
+<p>  Input contains multiple test cases. Each test case starts with a number N (0 &lt; N &lt;= 1000) – the total number of balloons distributed. The next N lines contain one color each. The color of a balloon is a string of up to 15 lower-case letters. </p>
+<p>A test case with N = 0 terminates the input and this test case is not to be processed.   </p>
+<p><strong>Output</strong></p>
+<p>For each case, print the color of balloon for the most popular problem on a single line. It is guaranteed that there is a unique solution for each test case. </p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">green</span><br><span class="line">red</span><br><span class="line">blue</span><br><span class="line">red</span><br><span class="line">red</span><br><span class="line">3</span><br><span class="line">pink</span><br><span class="line">orange</span><br><span class="line">pink</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">red</span><br><span class="line">pink</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	while(cin&gt;&gt;n&amp;&amp;n)</span><br><span class="line">	&#123;</span><br><span class="line">		string a[1100];</span><br><span class="line">		int sum[1100]= &#123;0&#125;,dex=0;</span><br><span class="line">		for(int i=0; i&lt;n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=0; i&lt;n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			for(int j=1; j&lt;n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if(a[i]==a[j])</span><br><span class="line">				&#123;</span><br><span class="line">					sum[i]++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		int mas=-110;</span><br><span class="line">		for(int i=0; i&lt;n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(sum[i]&gt;mas)</span><br><span class="line">			&#123;</span><br><span class="line">				mas=sum[i];</span><br><span class="line">				dex=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;a[dex]&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：string的应用</p>
+<h2 id="G-不重复数字"><a href="#G-不重复数字" class="headerlink" title="G - 不重复数字"></a><a href="https://vjudge.net/problem/HYSBZ-2761" target="_blank" rel="noopener">G - 不重复数字</a></h2><p> 给出N个数，要求把其中重复的去掉，只保留第一次出现的数。</p>
+<p>例如，给出的数为1 2 18 3 3 19 2 3 6 5 4，其中2和3有重复，去除后的结果为1 2 18 3 19 6 5 4。</p>
+<p><strong>Input</strong></p>
+<p>输入第一行为正整数T，表示有T组数据。</p>
+<p>接下来每组数据包括两行，第一行为正整数N，表示有N个数。第二行为要去重的N个正整数</p>
+<p><strong>Output</strong></p>
+<p>对于每组数据，输出一行，为去重后剩下的数字，数字之间用一个空格隔开。</p>
+<p><strong>Sample Input</strong></p>
+<p>2<br>11<br>1 2 18 3 3 19 2 3 6 5 4<br>6<br>1 2 3 4 5 6</p>
+<p><strong>Sample Output</strong></p>
+<p>1 2 18 3 19 6 5 4<br>1 2 3 4 5 6</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">		<span class="keyword">int</span> n;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> num;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">			<span class="keyword">if</span>(!s.count(num))</span><br><span class="line">			&#123;</span><br><span class="line">				s.insert(num);</span><br><span class="line">				<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">				 <span class="built_in">printf</span>(<span class="string">"%d"</span>,num);</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				 <span class="built_in">printf</span>(<span class="string">"%d "</span>,num);</span><br><span class="line">			&#125;</span><br><span class="line">			  </span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://vjudge.net/problem/HDU-1716" target="_blank" rel="noopener">J - 排列2</a></p>
+<p>Ray又对数字的列产生了兴趣：<br>现有四张卡片，用这四张卡片能排列出很多不同的4位数，要求按从小到大的顺序输出这些4位数。 </p>
+<p><strong>Input</strong></p>
+<p>每组数据占一行，代表四张卡片上的数字（0&lt;=数字&lt;=9），如果四张卡片都是0，则输入结束</p>
+<p><strong>Output</strong></p>
+<p>对每组卡片按从小到大的顺序输出所有能由这四张卡片组成的4位数，千位数字相同的在同一行，同一行中每个四位数间用空格分隔。<br>每组输出数据间空一行，最后一组数据后面没有空行。</p>
+<p><strong>Sample Input</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4</span><br><span class="line">1 1 2 3</span><br><span class="line">0 1 2 3</span><br><span class="line">0 0 0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Sample Output</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1234 1243 1324 1342 1423 1432</span><br><span class="line">2134 2143 2314 2341 2413 2431</span><br><span class="line">3124 3142 3214 3241 3412 3421</span><br><span class="line">4123 4132 4213 4231 4312 4321</span><br><span class="line"></span><br><span class="line">1123 1132 1213 1231 1312 1321</span><br><span class="line">2113 2131 2311</span><br><span class="line">3112 3121 3211</span><br><span class="line"></span><br><span class="line">1023 1032 1203 1230 1302 1320</span><br><span class="line">2013 2031 2103 2130 2301 2310</span><br><span class="line">3012 3021 3102 3120 3201 3210</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> c[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">char</span> x;</span><br><span class="line">	<span class="keyword">int</span> f = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%c%*c%c%*c%c%*c%c"</span>,&amp;c[<span class="number">0</span>],&amp;c[<span class="number">1</span>],&amp;c[<span class="number">2</span>],&amp;c[<span class="number">3</span>])) &#123;</span><br><span class="line">		getchar();</span><br><span class="line">		c[<span class="number">4</span>] = <span class="string">'\0'</span>;</span><br><span class="line">		<span class="keyword">if</span>(c[<span class="number">0</span>]==<span class="string">'0'</span>&amp;&amp;c[<span class="number">1</span>]==<span class="string">'0'</span>&amp;&amp;c[<span class="number">2</span>]==<span class="string">'0'</span>&amp;&amp;c[<span class="number">3</span>]==<span class="string">'0'</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span>(f == <span class="number">0</span>) f = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		x = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> flag  = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(c[<span class="number">0</span>]==<span class="string">'0'</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(x == c[<span class="number">0</span>]) <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>&lt;&lt;c;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">if</span>(flag == <span class="number">0</span>)</span><br><span class="line">					flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				x = c[<span class="number">0</span>];</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;c;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">while</span>(next_permutation(c,c+<span class="number">4</span>));</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="ypw521.github.io/tags/暑期集训/" rel="tag"># 暑期集训</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="ypw521.github.io/2019/08/29/二分加贪心第四周/" rel="next" title="二分+贪心">
+                  <i class="fa fa-chevron-left"></i> 二分+贪心
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="ypw521.github.io/2019/08/29/8.16自学/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Train-Problem-I"><span class="nav-number">1.</span> <span class="nav-text">B - Train Problem I</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Rails"><span class="nav-number">2.</span> <span class="nav-text">C - Rails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-A-B"><span class="nav-number">3.</span> <span class="nav-text">D - {A} + {B}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-不重复数字"><span class="nav-number">4.</span> <span class="nav-text">G - 不重复数字</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CJ--F</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="ypw521.github.io/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CJ--F</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="ypw521.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="ypw521.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="ypw521.github.io/js/utils.js?v=7.3.0"></script><script src="ypw521.github.io/js/motion.js?v=7.3.0"></script>
+<script src="ypw521.github.io/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="ypw521.github.io/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
